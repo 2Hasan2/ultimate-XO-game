@@ -77,7 +77,7 @@ function switchPlayer(){
 // input : {row, col} , board index
 function play(pos,board_index,callback=true) {
     if (board_index !== board) return;
-    if (playAbles) return;
+    if (!playAbles) return;
     const { row, col } = pos
     arrays[board][+row][+col] = player;
     if (checkWin() || arrays[board].flat().every((cell) => cell !== "")) {
@@ -91,7 +91,6 @@ function play(pos,board_index,callback=true) {
         freeze(board);
         playAbles--;
     }
-    console.log(playAbles);
     // if the next board is not frozen, give it opacity
     boxes[board].classList.add('opacity');
     board = +row * 3 + +col;
