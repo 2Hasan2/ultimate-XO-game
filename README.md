@@ -1,5 +1,6 @@
 <body>
     <h1> ultimate-XO-game </h1>
+    <h2>Description</h2>
     <p>This project is a simple 3x3 box game implemented in HTML, CSS, and JavaScript. The game involves multiple boards, and players take turns placing their symbols (X or O) in the boxes. The objective is to win individual boards and accumulate a score.</p>
     <h2>Features</h2>
     <ul>
