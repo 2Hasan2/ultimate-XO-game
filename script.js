@@ -2,6 +2,20 @@ const container = document.querySelector('.box-container')
 const boxes = document.querySelectorAll('.box');
 const arrays = [];
 
+const win_patterns = [
+    // Horizontal
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    // Vertical
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    // Cross
+    [0, 4, 8],
+    [2, 4, 6],
+];
+
 
 Resize();
 function Resize(){
@@ -47,10 +61,12 @@ function play(event,board_index) {
     if (event.target.innerText !== "") return;
     const { row, col } = event.target.dataset;
     arrays[board][+row][+col] = player;
-    console.log(arrays[board]);
+    if (checkWin()) {
+       freeze(board); 
+    }
     board = +row * 3 + +col;
-    render();
     switchPlayer();
+    render();
 }
 
 function render() {
@@ -61,5 +77,31 @@ function render() {
             cell.innerText = arrays[index][+row][+col];
         });
     });
+}
 
+function checkWin() {
+    const array = arrays[board];
+    for (let i = 0; i < win_patterns.length; i++) {
+        const [a, b, c] = win_patterns[i];
+        if (array[Math.floor(a / 3)][a % 3] !== "" && array[Math.floor(a / 3)][a % 3] === array[Math.floor(b / 3)][b % 3] && array[Math.floor(a / 3)][a % 3] === array[Math.floor(c / 3)][c % 3]) {
+            return array[Math.floor(a / 3)][a % 3];
+        }
+    }
+    return null;
+}
+
+function freeze(board) {
+    boxes[board].classList.add('freeze');
+    [...boxes[board].children].forEach((cell, i) => {
+        const { row, col } = cell.dataset;
+        const array = arrays[board];
+        for (let i = 0; i < win_patterns.length; i++) {
+            const [a, b, c] = win_patterns[i];
+            if (array[Math.floor(a / 3)][a % 3] !== "" && array[Math.floor(a / 3)][a % 3] === array[Math.floor(b / 3)][b % 3] && array[Math.floor(a / 3)][a % 3] === array[Math.floor(c / 3)][c % 3]) {
+                if (a === +row * 3 + +col || b === +row * 3 + +col || c === +row * 3 + +col) {
+                    cell.classList.add('win');
+                }
+            }
+        }
+    })   
 }
