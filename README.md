@@ -1,27 +1,4 @@
 # ultimate-XO-game
-
-<head>
-    <title>README for 3x3 Box</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-        }
-
-        h1, h2, h3 {
-            color: #333;
-        }
-
-        code {
-            background-color: #f4f4f4;
-            border: 1px solid #ddd;
-            padding: 5px;
-            display: block;
-            margin: 10px 0;
-        }
-    </style>
-</head>
 <body>
 
     <h1>3x3 Box</h1>
