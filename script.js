@@ -49,8 +49,18 @@ for (let i = 0; i < 9; i++) {
     arrays.push(array);
 }
 
+
 let player = "X"
-let board = 0;
+// start with random board
+let board = Math.floor(Math.random() * 9);
+// remove class freeze
+boxes[board].classList.remove('opacity');
+// unfreeze count
+let playAbles = 9;
+// win count
+let X = 0;
+let O = 0;
+
 
 function switchPlayer(){
     player = player === "X" ? "O" : "X";
@@ -61,10 +71,31 @@ function play(event,board_index) {
     if (event.target.innerText !== "") return;
     const { row, col } = event.target.dataset;
     arrays[board][+row][+col] = player;
-    if (checkWin()) {
-       freeze(board); 
+    if (checkWin() || arrays[board].flat().every((cell) => cell !== "")) {
+        if (checkWin() === "X") {
+            X++;
+            document.querySelector('#X').innerText = X;
+        } else if (checkWin() === "O") {
+            O++;
+            document.querySelector('#O').innerText = O;
+        }
+        freeze(board);
+        playAbles--;
     }
+    // if the next board is not frozen, give it opacity
+    boxes[board].classList.add('opacity');
     board = +row * 3 + +col;
+
+    // if the next board is frozen and not the last one, play random one
+    if (boxes[board].classList.contains('freeze') && playAbles >= 1 ) {
+        let random = Math.floor(Math.random() * 9);
+        while (boxes[random].classList.contains('freeze')) {
+            random = Math.floor(Math.random() * 9);
+        }
+        board = random;
+    }
+
+    boxes[board].classList.remove('opacity');
     switchPlayer();
     render();
 }
@@ -93,6 +124,7 @@ function checkWin() {
 function freeze(board) {
     boxes[board].classList.add('freeze');
     [...boxes[board].children].forEach((cell, i) => {
+        // color the winning cells
         const { row, col } = cell.dataset;
         const array = arrays[board];
         for (let i = 0; i < win_patterns.length; i++) {

@@ -12,9 +12,10 @@
         }
         body{
             display: flex;
-            justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
+            justify-content: center;
         }
 
         .box-container {
@@ -49,7 +50,11 @@
             justify-content: center;
             align-items: center;
         }
+        .opacity{
+            opacity: 0.7;
+        }
         .freeze{
+            opacity: 0.5;
             pointer-events: none;
         }
 
@@ -57,19 +62,31 @@
             background-color: rgb(92, 202, 29);
         }
 
+        .score{
+            padding: 10px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
     </style>
 </head>
 <body>
+    <div class="score">
+        <h1>Score</h1>
+        <h2>X: <span class="X" id="X">0</span></h2>
+        <h2>O: <span class="O" id="O">0</span></h2>
+    </div>
     <div class="box-container">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+        <div class="box opacity"></div>
+        <div class="box opacity"></div>
+        <div class="box opacity"></div>
+        <div class="box opacity"></div>
+        <div class="box opacity"></div>
+        <div class="box opacity"></div>
+        <div class="box opacity"></div>
+        <div class="box opacity"></div>
+        <div class="box opacity"></div>
     </div>
 </body>
 <script src="script.js"></script>
