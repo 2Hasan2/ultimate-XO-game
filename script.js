@@ -72,7 +72,7 @@ function switchPlayer(){
 }
 
 // input : {row, col} , board index
-function play(pos,board_index) {
+function play(pos,board_index,callback=true) {
     if (board_index !== board) return;
     const { row, col } = pos
     arrays[board][+row][+col] = player;
@@ -103,6 +103,18 @@ function play(pos,board_index) {
     boxes[board].classList.remove('opacity');
     switchPlayer();
     render();
+    if (callback) {
+        play_com(board)
+    }
+}
+function play_com(board){
+    let move = computerMove([].concat(...arrays[board]))
+    console.log(move);
+    let row = Math.floor(move / 3);
+    let col = move % 3;
+    setTimeout(()=>{
+        play({row, col}, board, false)
+    },200)
 }
 
 // render the board to the screen
