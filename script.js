@@ -57,7 +57,8 @@ for (let i = 0; i < 9; i++) {
 }
 
 
-let player = Math
+
+let player = "X"
 // start with random board
 let board = Math.floor(Math.random() * 9);
 // remove class freeze

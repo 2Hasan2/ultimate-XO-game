@@ -36,7 +36,8 @@ body{
     height: 100%;
     line-height: calc(50% - 400%);
     border-radius: 10%;
-    font-size: 400%;
+    font-size: large;
+    font-weight: bolder;
     text-align: center;
     background-color: rgb(223, 226, 20);
     cursor: pointer;
