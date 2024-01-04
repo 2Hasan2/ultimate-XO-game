@@ -17,6 +17,7 @@ const win_patterns = [
 ];
 
 
+// set the container to be a square
 Resize();
 function Resize(){
     const size = Math.min(window.innerWidth, window.innerHeight);
@@ -26,6 +27,7 @@ function Resize(){
 window.addEventListener('resize', () => {Resize()})
 
 
+// create 9 boxes
 boxes.forEach((box,index) => {
     box.id = index;
    for(let i = 0; i < 9; i++){
@@ -35,11 +37,14 @@ boxes.forEach((box,index) => {
         div.dataset.col = i % 3;
         box.appendChild(div);
         div.addEventListener('click', (e) => {
-           play(e, index)
+            if (e.target.innerText !== "") return;
+            const { row, col } = event.target.dataset;
+            play({row ,col}, index)
         })
    }
 })
 
+// create 9 arrays
 for (let i = 0; i < 9; i++) {
     const array = [
         ["", "", ""],
@@ -61,15 +66,15 @@ let playAbles = 9;
 let X = 0;
 let O = 0;
 
-
+// switch player
 function switchPlayer(){
     player = player === "X" ? "O" : "X";
 }
 
-function play(event,board_index) {
+// input : {row, col} , board index
+function play(pos,board_index) {
     if (board_index !== board) return;
-    if (event.target.innerText !== "") return;
-    const { row, col } = event.target.dataset;
+    const { row, col } = pos
     arrays[board][+row][+col] = player;
     if (checkWin() || arrays[board].flat().every((cell) => cell !== "")) {
         if (checkWin() === "X") {
@@ -100,6 +105,7 @@ function play(event,board_index) {
     render();
 }
 
+// render the board to the screen
 function render() {
     boxes.forEach((box, index) => {
         box = [...box.children];
@@ -110,6 +116,7 @@ function render() {
     });
 }
 
+// check if there is a winner
 function checkWin() {
     const array = arrays[board];
     for (let i = 0; i < win_patterns.length; i++) {
@@ -121,6 +128,7 @@ function checkWin() {
     return null;
 }
 
+// freeze the board
 function freeze(board) {
     boxes[board].classList.add('freeze');
     [...boxes[board].children].forEach((cell, i) => {
