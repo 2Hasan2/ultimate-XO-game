@@ -39,7 +39,9 @@ boxes.forEach((box,index) => {
         div.addEventListener('click', (e) => {
             if (e.target.innerText !== "") return;
             const { row, col } = event.target.dataset;
-            play({row ,col}, index)
+            setTimeout(()=>{
+                play({row ,col}, index)
+            },200)
         })
    }
 })
@@ -55,7 +57,7 @@ for (let i = 0; i < 9; i++) {
 }
 
 
-let player = "X"
+let player = Math
 // start with random board
 let board = Math.floor(Math.random() * 9);
 // remove class freeze
@@ -108,7 +110,7 @@ function play(pos,board_index,callback=true) {
     }
 }
 function play_com(board){
-    let move = computerMove([].concat(...arrays[board]))
+    let move = computerMove([].concat(...arrays[board]), player)
     console.log(move);
     let row = Math.floor(move / 3);
     let col = move % 3;

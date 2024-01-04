@@ -8,7 +8,7 @@ const winPatterns = [
     [0, 4, 8],
     [2, 4, 6]
 ];
-function computerMove(gameBoard) {
+function computerMove(gameBoard, player) {
 
     const gameBoard2D=[
         gameBoard.slice(0,3),
@@ -118,7 +118,7 @@ function checkEmptyRows_2(gameBoard) {
     let Array = [];
     [[0, 1, 2], [3, 4, 5], [6, 7, 8],].forEach((row) => {
         let rows = [gameBoard[row[0]], gameBoard[row[1]], gameBoard[row[2]]];
-        if (rows.includes("") && rows.includes("O") && !rows.includes('X')) {
+        if (rows.includes("") && rows.includes(player) && !rows.includes('X')) {
             if ([0, 2, 6, 8].includes(row[rows.indexOf('')])) {
                 Array.push(row[rows.indexOf("")])
             } else {
@@ -133,7 +133,7 @@ function checkEmptyCols_2(gameBoard) {
     let Array = [];
     [[0, 3, 6], [1, 4, 7], [2, 5, 8],].forEach((col) => {
         let cols = [gameBoard[col[0]], gameBoard[col[1]], gameBoard[col[2]]];
-        if (cols.includes("") && cols.includes("O") && !cols.includes('X')) {
+        if (cols.includes("") && cols.includes(player) && !cols.includes('X')) {
             if ([0, 2, 6, 8].includes(col[cols.indexOf('')])) {
                 Array.push(col[cols.indexOf("")])
             } else {
