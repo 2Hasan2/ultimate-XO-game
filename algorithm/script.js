@@ -1,10 +1,13 @@
 const boardElement = document.getElementById('board');
+let overGame= false
 let board = [
     ["", "", ""],
     ["", "", ""],
     ["", "", ""]
 ];
 
+const resetBtn = document.getElementById('reset')
+resetBtn.onclick= () => resetGame()
 // Add cells to the board
 for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
@@ -18,6 +21,7 @@ for (let i = 0; i < 3; i++) {
 }
 
 function cellClick(event) {
+    if (overGame) return;
     const row = parseInt(event.target.dataset.row);
     const col = parseInt(event.target.dataset.col);
 
@@ -25,35 +29,12 @@ function cellClick(event) {
     if (board[row][col] === "") {
         // Make a move for the player
         board[row][col] = "X";
-        updateBoard();
+        updateBoard()
         
-        // Check for a winner or a tie
-        const winner = evaluate(board);
-        if (winner !== null) {
-            alert(`${winner} wins!`);
-            resetGame();
-            return;
-        } else if (isBoardFull(board)) {
-            alert("It's a tie!");
-            resetGame();
-            return;
-        }
-
         // Make a move for the computer
         Algorithm(board,"O");
         updateBoard();
-
-        // Check for a winner or a tie again
-        const newWinner = evaluate(board);
-        if (newWinner !== null) {
-            alert(`${newWinner} wins!`);
-            resetGame();
-            return;
-        } else if (isBoardFull(board)) {
-            alert("It's a tie!");
-            resetGame();
-            return;
-        }
+      
     }
 }
 
@@ -64,6 +45,23 @@ function updateBoard() {
         const col = index % 3;
         cell.textContent = board[row][col];
     });
+    checkWinOrTie()
+}
+
+function checkWinOrTie(){
+    const newWinner = evaluate(board);
+    if (newWinner !== null) {
+        overGame = true
+        setTimeout(()=>{
+            alert(`${newWinner} wins!`);
+        },10)
+        return;
+    } else if (isBoardFull(board)) {
+        overGame = true
+        alert("It's a tie!");
+        resetGame();
+        return;
+    }
 }
 
 function resetGame() {

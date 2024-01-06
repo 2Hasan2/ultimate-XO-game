@@ -121,7 +121,7 @@ function Algorithm(board, player){
 
 		move = BestMoves[Math.floor(Math.random() * BestMoves.length)]
 		
+		board[move.i][move.j] = player;
 		return move
-		// board[move.i][move.j] = player;
 	}
 
