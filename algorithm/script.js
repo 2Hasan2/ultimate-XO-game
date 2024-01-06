@@ -40,7 +40,7 @@ function cellClick(event) {
         }
 
         // Make a move for the computer
-        computerMove(board,"O");
+        Algorithm(board,"O");
         updateBoard();
 
         // Check for a winner or a tie again

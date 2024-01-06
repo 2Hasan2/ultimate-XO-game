@@ -21,7 +21,7 @@ function evaluate(board) {
 		}
 		return null; // No winner
 	}
-function computerMove(board, player){
+function Algorithm(board, player){
 	function minimax(board, depth, isMaximizing) {
 		const winner = evaluate(board);
 	
@@ -82,6 +82,7 @@ function computerMove(board, player){
 		}
 		return move;
 	}
+
 	function IsMorror(board){
 		let x = y = true
 		// X
@@ -97,7 +98,6 @@ function computerMove(board, player){
 	
 	function AllBestMoves(morror, bestMove){
 		let BestMoves = [bestMove]
-		console.log(bestMove);
 		if(morror.y && morror.x){
 			// corner
 			if (bestMove.i % 2 == bestMove.j % 2) {
@@ -108,14 +108,11 @@ function computerMove(board, player){
 			}
 		}else if (morror.x && bestMove.i == 0){
 			let newMove = {i:bestMove.i+2, j: bestMove.j}
-			console.log("x morror");
 			BestMoves.push(newMove)
 		}else if (morror.y && bestMove.j == 0){
 			let newMove = {i:bestMove.i, j: bestMove.j+2}
-			console.log("y morror");
 			BestMoves.push(newMove)
 		}
-		console.log(BestMoves);
 		return BestMoves;
 	}
 
@@ -123,8 +120,8 @@ function computerMove(board, player){
 		let BestMoves = AllBestMoves(IsMorror(board), move);
 
 		move = BestMoves[Math.floor(Math.random() * BestMoves.length)]
-		console.log(move);
 		
-		board[move.i][move.j] = player;
+		return move
+		// board[move.i][move.j] = player;
 	}
 
