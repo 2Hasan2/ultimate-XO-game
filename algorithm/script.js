@@ -1,4 +1,9 @@
 const boardElement = document.getElementById('board');
+let board = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""]
+];
 
 // Add cells to the board
 for (let i = 0; i < 3; i++) {
@@ -35,7 +40,7 @@ function cellClick(event) {
         }
 
         // Make a move for the computer
-        computerMove("O");
+        computerMove(board,"O");
         updateBoard();
 
         // Check for a winner or a tie again
