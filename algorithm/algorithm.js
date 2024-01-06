@@ -26,7 +26,8 @@ let board = [
     }
     return null; // No winner
   }
-  
+let player = "O"
+
   function minimax(board, depth, isMaximizing) {
     const winner = evaluate(board);
   
@@ -43,7 +44,7 @@ let board = [
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
           if (board[i][j] === "") {
-            board[i][j] = "O";
+            board[i][j] = player;
             const score = minimax(board, depth + 1, false);
             board[i][j] = "";
             bestScore = Math.max(score, bestScore);
@@ -74,21 +75,63 @@ let board = [
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         if (board[i][j] === "") {
-          board[i][j] = "O";
+          board[i][j] = player;
           const score = minimax(board, 0, false);
           board[i][j] = "";
           if (score > bestScore) {
             bestScore = score;
+
             move = { i, j };
           }
         }
       }
     }
-  
     return move;
   }
 
-  function computerMove(player){
+function computerMove(player){
     let move = bestMove();
+    let BestMoves = AllBestMoves(IsMorror(board), move);
+
+    move = BestMoves[Math.floor(Math.random() * BestMoves.length)]
+    console.log(move);
+    
     board[move.i][move.j] = player;
   }
+
+function IsMorror(board){
+  let x = y = true
+  // X
+  for (let i = 0; i < 3; i++) {
+    if (board[0][i] != board[2][i]) x = false
+  }
+  // Y
+  for (let i = 0; i < 3; i++) {
+    if (board[i][0] != board[i][2]) y = false
+  }
+  return {x, y}
+}
+
+function AllBestMoves(morror, bestMove){
+  let BestMoves = [bestMove]
+  console.log(bestMove);
+  if(morror.y && morror.x){
+    // corner
+    if (bestMove.i % 2 == bestMove.j % 2) {
+      BestMoves = [{i:0,j:0},{i:2,j:0},{i:0,j:2},{i:2,j:2}]
+    // edge
+    }else{
+      BestMoves = [{i:0,j:1},{i:1,j:0},{i:1,j:2},{i:2,j:1}]
+    }
+  }else if (morror.x && bestMove.i == 0){
+    let newMove = {i:bestMove.i+2, j: bestMove.j}
+    console.log("x morror");
+    BestMoves.push(newMove)
+  }else if (morror.y && bestMove.j == 0){
+    let newMove = {i:bestMove.i, j: bestMove.j+2}
+    console.log("y morror");
+    BestMoves.push(newMove)
+  }
+  console.log(BestMoves);
+  return BestMoves;
+}
