@@ -2,7 +2,7 @@
     "name": "XO",
     "short_name": "XO",
     "description": "XO Game with minimax algorithm",
-    "start_url": "/algorithm",
+    "start_url": "/ultimate-XO-game//algorithm",
     "display": "standalone",
     "background_color": "#7fffd4",
     "theme_color": "#000000",
