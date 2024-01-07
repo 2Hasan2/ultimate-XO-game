@@ -71,7 +71,7 @@ function resetGame() {
         ["", "", ""],
         ["", "", ""]
     ];
-    
+    overGame = false
     // Update the displayed board
     updateBoard();
 }
