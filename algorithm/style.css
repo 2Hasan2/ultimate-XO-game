@@ -35,3 +35,8 @@ button{
     font-size: large;
     font-weight: bold;
 }
+#score{
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(13, 14, 13, 0.859);
+}

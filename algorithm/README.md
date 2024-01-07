@@ -75,8 +75,7 @@
     <li><strong>Description:</strong> Finds and returns all the best moves for the "O" player using the minimax algorithm.</li>
   </ul>
   <h3>Example Usage</h3>
-  <pre>
-    <code>const computer = new Computer_XO();
+  <pre>code>const computer = new Computer_XO();
 computer.setPlayer("O");
 
 const board = [
@@ -85,6 +84,5 @@ const board = [
   ["O", "", ""]
 ];
 
-console.log(computer.input(board));</code>
-  </pre>
+console.log(computer.input(board));</code></pre>
 </body>
