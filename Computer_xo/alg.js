@@ -122,7 +122,6 @@ class Computer_XO {
     ["O", "", ""]
   ];
 
-  // Example: Using the TicTacToe class with enhanced evaluate()
   const computer = new Computer_XO();
   computer.setPlayer("O");
   
