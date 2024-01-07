@@ -98,7 +98,7 @@ function checkWinOrTie() {
         return updateScore(board[1][1]);
     }
 
-    return board.flat().includes("") ? null : "It's a tie!";
+    return board.flat().includes("") ? null : overGame = true;
 }
 
 // Update the score
