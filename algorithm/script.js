@@ -18,7 +18,11 @@ computer_XO.player = "O";
 
 scoreElement.textContent = `X: ${score.X} - O: ${score.O}`
 
-resetBtn.onclick= () => resetGame()
+resetBtn.onclick= () => {
+    if (overGame) {
+        resetGame()
+    }
+}
 
 // Add cells to the board
 for (let i = 0; i < 3; i++) {
