@@ -85,6 +85,6 @@ const board = [
   ["O", "", ""]
 ];
 
-console.log(computer.input(board, "O"));</code>
+console.log(computer.input(board));</code>
   </pre>
 </body>
